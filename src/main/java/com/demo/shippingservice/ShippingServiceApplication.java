@@ -2,6 +2,7 @@ package com.demo.shippingservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,11 +32,15 @@ public class ShippingServiceApplication {
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.postForObject("http://completion-service/completions", order, String.class);
-			return "Order processed successfully";
+//			restTemplate.postForObject("http://completion-service/completions", order, String.class);
+			return "Order processed successfully" + order.toString();
 		} else {
-			return "Order failed validation";
+			return "Order failed validation" +  order.toString();
 		}
+	}
+	@GetMapping("/")
+	public String respondBack() {
+		return "Shipping Service!";
 	}
 
 	private String selectRandomShippingProvider() {

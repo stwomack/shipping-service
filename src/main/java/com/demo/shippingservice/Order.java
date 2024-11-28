@@ -14,6 +14,7 @@ public class Order {
                 ", customerName='" + customerName + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", quantity=" + quantity +
+                ", shippingProvider='" + shippingProvider + '\'' +
                 '}';
     }
 
