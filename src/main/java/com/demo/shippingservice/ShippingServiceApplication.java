@@ -1,5 +1,7 @@
 package com.demo.shippingservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import java.util.Random;
 @SpringBootApplication
 @RestController
 public class ShippingServiceApplication {
+	private final Logger LOG = LoggerFactory.getLogger(ShippingServiceApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShippingServiceApplication.class, args);
@@ -32,7 +35,8 @@ public class ShippingServiceApplication {
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-//			restTemplate.postForObject("http://completion-service/completions", order, String.class);
+			String response = restTemplate.postForObject("http://completion-service/completions", order, String.class);
+            LOG.info("completion service response: {}", response);
 			return "Order processed successfully" + order.toString();
 		} else {
 			return "Order failed validation" +  order.toString();
@@ -40,6 +44,7 @@ public class ShippingServiceApplication {
 	}
 	@GetMapping("/")
 	public String respondBack() {
+		LOG.info("Root site called");
 		return "Shipping Service!";
 	}
 
