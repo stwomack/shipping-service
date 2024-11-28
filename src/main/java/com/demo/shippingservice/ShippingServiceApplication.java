@@ -31,7 +31,7 @@ public class ShippingServiceApplication {
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.postForObject("http://completion-service", order, String.class);
+			restTemplate.postForObject("http://completion-service/orders", order, String.class);
 			return "Order processed successfully";
 		} else {
 			return "Order failed validation";
