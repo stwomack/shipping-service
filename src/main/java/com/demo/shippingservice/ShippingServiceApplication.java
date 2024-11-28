@@ -19,7 +19,7 @@ public class ShippingServiceApplication {
 
 	}
 
-	@PostMapping("/orders")
+	@PostMapping("/shipping")
 	public String processOrder(@RequestBody Order order) {
 		// Validate order (e.g., 90% success rate)
 		if (new Random().nextInt(10) > 1) {
@@ -31,7 +31,7 @@ public class ShippingServiceApplication {
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.postForObject("http://completion-service/orders", order, String.class);
+			restTemplate.postForObject("http://completion-service/completions", order, String.class);
 			return "Order processed successfully";
 		} else {
 			return "Order failed validation";
