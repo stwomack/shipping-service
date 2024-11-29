@@ -1,6 +1,6 @@
 package com.demo.shippingservice;
 
-public class Order {
+public class CustomOrder {
     Long id;
     String customerName;
     String itemName;

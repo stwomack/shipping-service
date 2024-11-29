@@ -24,22 +24,22 @@ public class ShippingServiceApplication {
 	}
 
 	@PostMapping("/shipping")
-	public String processOrder(@RequestBody Order order) {
+	public String processOrder(@RequestBody CustomOrder customOrder) {
 		// Validate order (e.g., 90% success rate)
 		if (new Random().nextInt(10) > 1) {
 			// Select shipping provider
 			String shippingProvider = selectRandomShippingProvider();
 
 			// Enrich order with shipping provider
-			order.setShippingProvider(shippingProvider);
+			customOrder.setShippingProvider(shippingProvider);
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-			String response = restTemplate.postForObject("http://completion-service/completions", order, String.class);
+			String response = restTemplate.postForObject("http://completion-service/completions", customOrder, String.class);
             LOG.info("completion service response: {}", response);
-			return "Order processed successfully" + order.toString();
+			return "Order processed successfully" + customOrder.toString();
 		} else {
-			return "Order failed validation" +  order.toString();
+			return "Order failed validation" +  customOrder.toString();
 		}
 	}
 	@GetMapping("/")
