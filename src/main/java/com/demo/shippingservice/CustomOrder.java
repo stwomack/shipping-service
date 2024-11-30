@@ -1,7 +1,6 @@
 package com.demo.shippingservice;
 
 public class CustomOrder {
-    Long id;
     String customerName;
     String itemName;
     int quantity;
@@ -10,7 +9,6 @@ public class CustomOrder {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
                 ", customerName='" + customerName + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", quantity=" + quantity +
@@ -24,14 +22,6 @@ public class CustomOrder {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getItemName() {
@@ -57,6 +47,4 @@ public class CustomOrder {
     public void setShippingProvider(String shippingProvider) {
         this.shippingProvider = shippingProvider;
     }
-
-
 }
