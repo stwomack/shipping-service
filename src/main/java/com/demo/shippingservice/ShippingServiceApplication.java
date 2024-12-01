@@ -35,8 +35,13 @@ public class ShippingServiceApplication {
 
 			// Send enriched order to Order Completion Service
 			RestTemplate restTemplate = new RestTemplate();
-			String response = restTemplate.postForObject("http://completion-service/completions", customOrder, String.class);
-            LOG.info("completion service response: {}", response);
+			String response = "No response";
+			try {
+				response = restTemplate.postForObject("http://completion-service/completions", customOrder, String.class);
+			} catch (Exception e) {
+				LOG.error("Ooops, service probably down: {}", e.getMessage());
+			}
+            LOG.info("Completion service response: {}", response);
 			return "Order processed successfully" + customOrder.toString();
 		} else {
 			return "Order failed validation" +  customOrder.toString();
